@@ -55,7 +55,7 @@ class User {
         $password = hash("sha512", $password);
 
         if(!empty($email) AND !empty($password)) {
-            $req = $this->_sql->prepare("SELECT * FROM user WHERE email = ? AND pasword = ?");
+            $req = $this->_sql->prepare("SELECT * FROM user WHERE email = ? AND password = ?");
             $req->execute(array($email, $password));
 
             if($req->rowCount() > 0) {
