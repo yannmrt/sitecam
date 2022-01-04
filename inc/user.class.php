@@ -28,8 +28,8 @@ class User {
         $password = hash("sha512", $password);
 
         if(!empty($email) AND !empty($password)) {
-            $req = $this->_sql->prepare("INSERT INTO user SET email = ? AND password = ?");
-            $req->execute(array($email, $password));
+            $req = $this->_sql->prepare("INSERT INTO user SET email = ?, password = ? AND permission = ?");
+            $req->execute(array($email, $password, "0"));
 
             header('Location: login.php');
         } else {
