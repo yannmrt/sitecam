@@ -113,4 +113,16 @@ class User {
         }
     }
 
+    /**
+     * 
+     * Logout user
+     * 
+     */
+    public function logout() {
+        $session_destroy();
+        $_SESSION = array();
+
+        header("Location: login.php");
+    }
+
 } 
