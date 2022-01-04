@@ -28,12 +28,8 @@ class User {
         $password = hash("sha512", $password);
 
         if(!empty($email) AND !empty($password)) {
-            $req = $this->_sql->prepare("INSERT INTO user SET email = :email, password = :password, permission = :permission");
-            $req->execute(array(
-                "email" => $email, 
-                "password" => $password,
-                "permission" => 0
-            ));
+            $req = $this->_sql->prepare("INSERT INTO user(email, password, permission) VALUES (?,?,?)");
+            $req->execute(array($email, $password, 0));
 
             echo "Inscription réussie.";
         } else {
