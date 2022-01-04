@@ -50,15 +50,32 @@ if(isset($_POST["form_add_cam"])) {
                 <th scope="col">Localisation / description</th>
                 <th scope="col">Adresse IP</th>
                 <th scope="col">Port</th>
+                <th scope="col">Port</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                </tr>
+                <?php
+
+                    $req = $_SQL->prepare("SELECT * FROM cam");
+                    $req->execute();
+
+                    $count = $req->rowCount();
+
+                    if($count > 0) {
+                        while($info = $req->fetch()) {
+                            ?>
+                            <tr>
+                            <th scope="row"><?php echo $info["id"]; ?></th>
+                            <td><?php echo $info["localisation"]; ?></td>
+                            <td><?php echo $info["ipAddress"]; ?></td>
+                            <td><?php echo $info["port"]; ?></td>
+                            <td><button class="btn-success">Supprimer</button></td>
+                            </tr>
+                            <?php
+                        }
+                    }
+
+                ?>
             </tbody>
             </table>
         </div>
