@@ -2,8 +2,6 @@
 
 require "inc/config.php";
 
-$_USER->isConnected();
-
 if(isset($_POST["form_login"])) {
     $_USER->register($_POST["email"], $_POST["password"]);
 }
