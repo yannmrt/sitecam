@@ -27,8 +27,12 @@ class Cam {
         $port = htmlspecialchars($port); 
 
         if(!empty($localisation) AND !empty($ipAddress) AND !empty($port)) {
-            $req = $this->_sql->prepare("INSERT INTO cam SET localisation = ?, ipAddress = ? AND port = ?");
-            $req->execute(array($localisation, $ipAddress, $port));
+            $req = $this->_sql->prepare("INSERT INTO cam SET localisation = :localisation, ipAddress = :ipAddress, port = :port");
+            $req->execute(array(
+                "localisation" => $localisation,
+                "ipAddress" => $ipAddress,
+                "port" => $port
+            ));
 
             echo "Caméra ajoutée";
         } 
