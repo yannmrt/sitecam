@@ -32,10 +32,10 @@ class User {
             $req->execute(array(
                 "email" => $email, 
                 "password" => $password,
-                "permission" => "0"
+                "permission" => 0
             ));
 
-            header('Location: login.php');
+            echo "Inscription réussie.";
         } else {
             echo "Veuillez compléter le champs email et mot de passe.";
         }
