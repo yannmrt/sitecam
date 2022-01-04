@@ -2,11 +2,7 @@
 
 require "inc/config.php";
 
-if($_SESSION["id"] > 0) {
-
-} else {
-    header('Location: login.php');
-}
+$_USER->isConnected();
 
 if($_USER->isEditor() == false) {
     header("Location: index.php");
