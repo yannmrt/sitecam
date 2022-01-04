@@ -28,14 +28,10 @@ class User {
         $password = hash("sha512", $password);
 
         if(!empty($email) AND !empty($password)) {
-            if(filter_var(FILTER_VALIDATE_EMAIL, $email)) {
-                $req = $this->_sql->prepare("INSERT INTO user SET email = ? AND password = ?");
-                $req->execute(array($email, $password));
+            $req = $this->_sql->prepare("INSERT INTO user SET email = ? AND password = ?");
+            $req->execute(array($email, $password));
 
-                header('Location: login.php');
-            } else {
-                echo "Veuillez entrer une adresse email valide.";
-            }
+            header('Location: login.php');
         } else {
             echo "Veuillez compléter le champs email et mot de passe.";
         }
@@ -55,21 +51,17 @@ class User {
         $password = hash("sha512", $password);
 
         if(!empty($email) AND !empty($password)) {
-            if(filter_var(FILTER_VALIDATE_EMAIL, $email)) {
-                $req = $this->_sql->prepare("SELECT * FROM user WHERE email = ? AND pasword = ?");
-                $req->execute(array($email, $password));
+            $req = $this->_sql->prepare("SELECT * FROM user WHERE email = ? AND pasword = ?");
+            $req->execute(array($email, $password));
 
-                if($req->rowCount() > 0) {
-                    $_userinfo = $req->fetch();
+            if($req->rowCount() > 0) {
+                $_userinfo = $req->fetch();
 
-                    $_SESSION["id"] = $_userinfo["id"];
-                    $_SESSION["email"] = $_userinfo["email"];
-                    $_SESSION["permission"] = $_userinfo["permission"];
+                $_SESSION["id"] = $_userinfo["id"];
+                $_SESSION["email"] = $_userinfo["email"];
+                $_SESSION["permission"] = $_userinfo["permission"];
 
-                    header('Location: gestion.php');
-                } else {
-                    echo "Mauvaise adresse email ou mot de passe";
-                }
+                header('Location: gestion.php');
             } else {
                 echo "Veuillez entrer une adresse email valide.";
             }
