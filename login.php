@@ -3,7 +3,7 @@
 require "inc/config.php";
 
 if(isset($_POST["form_login"])) {
-    $_USER->register($_POST["email"], $_POST["password"]);
+    $_USER->login($_POST["email"], $_POST["password"]);
 }
 
 ?>
